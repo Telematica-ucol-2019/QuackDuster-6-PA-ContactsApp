@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Contactos.Models"
+             x:Class="Contactos.View.ContactoMatto"
+             x:Name="thisContactoMatto"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <Grid RowDefinitions="*,auto">
+            <ScrollView Grid.Row="0">
+                <StackLayout BindingContext="{Binding BindingContext.Contacto, Source={x:Reference thisContactoMatto}}"
+                             x:DataType="model:Contacto"
+                             Margin="10">
+                    <Label Text="Nombre"/>
+                    <Frame BorderColor="Gray">
+                        <Entry Text="{Binding Nombre}"/>
+                    </Frame>
+
+                    <Label Text="Apellido paterno"/>
+                    <Frame BorderColor="Gray">
+                        <Entry Text="{Binding ApellidoPaterno}"/>
+                    </Frame>
+
+                    <Label Text="Apellido materno"/>
+                    <Frame BorderColor="Gray">
+                        <Entry Text="{Binding ApellidoMaterno}"/>
+                    </Frame>
+
+                    <Label Text="Organización"/>
+                    <Frame BorderColor="Gray">
+                        <Entry Text="{Binding Organizacion}"/>
+                    </Frame>
+
+                    <Label Text="Telefono(s)"/>
+                    <Frame BorderColor="Gray" VerticalOptions="Start" Padding="10">
+                        <StackLayout VerticalOptions="Start">
+                            <CollectionView ItemsSource="{Binding Telefonos}" VerticalOptions="End" >
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Telefono">
+                                        <StackLayout>
+                                            <Label Text="Número"/>
+                                            <Frame BorderColor="Gray">
+                                                <Entry Text="{Binding Numero}" />
+                                            </Frame>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+
+                            </CollectionView>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="Cancelar" Command="{Binding BindingContext.cmdContactoCancelar, Source={x:Reference thisContactoMatto}}" HorizontalOptions="Center"
+                        CommandParameter="{Binding BindingContext.Contacto, Source={x:Reference thisContactoMatto}}"/>
+                <Button Text="Guardar" Command="{Binding BindingContext.cmdContactoGuardar, Source={x:Reference thisContactoMatto}}" HorizontalOptions="Center"
+                         CommandParameter="{Binding BindingContext.Contacto, Source={x:Reference thisContactoMatto}}"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
