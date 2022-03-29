@@ -55,7 +55,9 @@
                     WidthRequest="40"
                     HeightRequest="40"
                     Margin="0,0,20,22"
-                    VerticalOptions="EndAndExpand" />
+                    VerticalOptions="EndAndExpand"
+                    Command="{Binding BindingContext.cmdContactoAgregar, Source={x:Reference thisContacto}}"
+                    />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

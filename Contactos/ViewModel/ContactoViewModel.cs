@@ -28,6 +28,9 @@ namespace Contactos.ViewModel
         public ICommand cmdContactoEdita { get; set; }
         public ICommand cmdContactoCancelar { get; set; }
         public ICommand cmdContactoGuardar { get; set; }
+        public ICommand cmdContactoAgregar { get; set; }
+        public ICommand cmdContactoAgregarTelefono { get; set; }
+        public ICommand cmdContactoEliminarTelefono { get; set; }
         public ContactoViewModel()
         {
             Contactos = new ObservableCollection<Contacto>();
@@ -59,6 +62,9 @@ namespace Contactos.ViewModel
 
             cmdContactoDetalle = new Command<Contacto>(async (x) => await PCmdContactoDetalle(x));
             cmdContactoElimina = new Command<Contacto>(async (x) => await PCmdContactoElimina(x));
+            cmdContactoAgregar = new Command(async () => await PCmdContactoAgregar());
+            cmdContactoAgregarTelefono = new Command(async () => await PCmdContactoAgregarTelefono());
+            cmdContactoEliminarTelefono = new Command<Telefono>(async (x) => await PCmdContactoEliminarTelefono(x));
             cmdContactoEdita = new Command<Contacto>(async (x) => await PCmdContactoEdita(x));
             cmdContactoCancelar = new Command(async () => await PCmdContactoCancelar());
             cmdContactoGuardar = new Command<Contacto>(async (x) => await PCmdContactoGuardar(x));
@@ -66,6 +72,20 @@ namespace Contactos.ViewModel
             async Task PCmdContactoDetalle(Models.Contacto _Contacto)
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new View.ContactoDetalle(_Contacto, this));
+            }
+
+            async Task PCmdContactoAgregar()
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new View.ContactoMatto(this));
+            }
+
+            async Task PCmdContactoAgregarTelefono()
+            {
+                if (Contacto.Telefonos == null)
+                    Contacto.Telefonos = new ObservableCollection<Telefono>();
+                Contacto.Telefonos.Add(new Telefono() { Id = Guid.NewGuid().ToString() });
+
+                await Task.Delay(1000);
             }
 
             async Task PCmdContactoElimina(Models.Contacto _Contacto)
@@ -102,6 +122,10 @@ namespace Contactos.ViewModel
                     indice = Contactos.IndexOf(tmp);
                     Contactos[indice] = _Contacto;
                 }
+                else
+                {
+                    Contactos.Add(_Contacto);
+                }
 
                 OnPropertyChanged();
 
@@ -109,7 +133,13 @@ namespace Contactos.ViewModel
                 await Application.Current.MainPage.Navigation.PopAsync();
             }
 
+            async Task PCmdContactoEliminarTelefono(Models.Telefono _Telefono)
+            {
+                Contacto.Telefonos.Remove(_Telefono);
 
+                await Task.Delay(1000);
+
+            }
 
         }
     }
