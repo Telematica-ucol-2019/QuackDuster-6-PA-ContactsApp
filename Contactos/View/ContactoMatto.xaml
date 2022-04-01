@@ -4,7 +4,7 @@
              xmlns:model="clr-namespace:Contactos.Models"
              x:Class="Contactos.View.ContactoMatto"
              x:Name="thisContactoMatto"
-             BackgroundColor="White">
+             BackgroundColor="AliceBlue">
     <ContentPage.Content>
         <Grid RowDefinitions="*,auto">
             <ScrollView Grid.Row="0">
@@ -32,17 +32,17 @@
                     </Frame>
 
                     <Grid ColumnDefinitions="auto,auto">
-                        <Button Grid.Column="0" Text="+"
+                        <Button Grid.Column="0" Text="➕"
                         BorderColor="#010C2B"
                         BorderWidth="1"
                         FontSize="15"
                         FontAttributes="Bold"
-                        BackgroundColor="#0E4CF3"
+                        BackgroundColor="DodgerBlue"
                         BorderRadius="12"
                         TextColor="White"
                         HorizontalOptions="CenterAndExpand"
-                        WidthRequest="35"
-                        HeightRequest="35"
+                        WidthRequest="50"
+                        HeightRequest="40"
                         VerticalOptions="CenterAndExpand"
                         Command="{Binding BindingContext.cmdContactoAgregarTelefono, Source={x:Reference thisContactoMatto}}"
                         />
@@ -84,9 +84,11 @@
             </ScrollView>
 
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="Cancelar" Command="{Binding BindingContext.cmdContactoCancelar, Source={x:Reference thisContactoMatto}}" HorizontalOptions="Center"
+                <Button BackgroundColor="#C40404" BorderColor="#010C2B"
+                        BorderWidth="1" Text="Cancelar" Command="{Binding BindingContext.cmdContactoCancelar, Source={x:Reference thisContactoMatto}}" HorizontalOptions="Center"
                         CommandParameter="{Binding BindingContext.Contacto, Source={x:Reference thisContactoMatto}}"/>
-                <Button Text="Guardar" Command="{Binding BindingContext.cmdContactoGuardar, Source={x:Reference thisContactoMatto}}" HorizontalOptions="Center"
+                <Button BackgroundColor="#34CA02" BorderColor="#010C2B"
+                        BorderWidth="1" Text="Guardar" Command="{Binding BindingContext.cmdContactoGuardar, Source={x:Reference thisContactoMatto}}" HorizontalOptions="Center"
                          CommandParameter="{Binding BindingContext.Contacto, Source={x:Reference thisContactoMatto}}"/>
             </StackLayout>
         </Grid>

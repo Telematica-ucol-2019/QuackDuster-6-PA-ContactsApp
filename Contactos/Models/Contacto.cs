@@ -18,6 +18,8 @@ namespace Contactos.Models
         public string Organizacion { get; set; }
 
         public ObservableCollection<Telefono> Telefonos { get; set; }
+
+        public bool Favorito { get; set; }
     }
 
     public class Telefono

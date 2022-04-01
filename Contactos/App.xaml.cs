@@ -10,8 +10,7 @@ namespace Contactos
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage( new Contacto() );
+            MainPage = new NavigationPage( new Contacto() );  
         }
 
         protected override void OnStart()

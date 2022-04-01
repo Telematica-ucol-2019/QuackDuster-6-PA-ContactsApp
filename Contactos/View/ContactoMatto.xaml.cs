@@ -20,7 +20,7 @@ namespace Contactos.View
             vm.Contacto = new Models.Contacto() { Id = Guid.NewGuid().ToString() };
             vm.Contacto.Telefonos = new System.Collections.ObjectModel.ObservableCollection<Models.Telefono>();
             BindingContext = vm;
-            Title = "NUEVO CONTACTO";
+            Title = "Agregar nuevo contacto";
         }
 
         public ContactoMatto(Models.Contacto contacto, ContactoViewModel vm)
@@ -30,7 +30,7 @@ namespace Contactos.View
             vm.Contacto = new Models.Contacto();
             vm.Contacto = contacto;
             BindingContext = vm;
-            Title = "EDITA CONTACTO";
+            Title = "Edita contacto";
         }
     }
 }

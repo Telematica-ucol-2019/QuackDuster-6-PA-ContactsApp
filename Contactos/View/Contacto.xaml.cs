@@ -16,5 +16,21 @@ namespace Contactos.View
         {
             InitializeComponent();
         }
+
+
+        public void CmbColor(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (btn.BackgroundColor.Equals(Color.AliceBlue))
+            {
+                btn.BackgroundColor = Color.LightGoldenrodYellow;
+            }
+            else
+            {
+                btn.BackgroundColor = Color.AliceBlue;
+            }
+        }
+
+
     }
 }
