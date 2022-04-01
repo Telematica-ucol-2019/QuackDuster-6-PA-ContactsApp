@@ -68,18 +68,18 @@ namespace Contactos.ViewModel
 
             });
 
-            Favoritos.Add(new Contacto()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Nombre = "Alberto",
-                ApellidoPaterno = "Osorio",
-                ApellidoMaterno = "Rodriguez",
-                Organizacion = "Facultad de Telematica",
-                Telefonos = new ObservableCollection<Telefono> { new Telefono { Id = Guid.NewGuid().ToString(), Numero= "3123155562" },
-                new Telefono {Id = Guid.NewGuid().ToString(), Numero= "312312245"}
-                }
+            //Favoritos.Add(new Contacto()
+            //{
+            //    Id = Guid.NewGuid().ToString(),
+            //    Nombre = "Alberto",
+            //    ApellidoPaterno = "Osorio",
+            //    ApellidoMaterno = "Rodriguez",
+            //    Organizacion = "Facultad de Telematica",
+            //    Telefonos = new ObservableCollection<Telefono> { new Telefono { Id = Guid.NewGuid().ToString(), Numero= "3123155562" },
+            //    new Telefono {Id = Guid.NewGuid().ToString(), Numero= "312312245"}
+            //    }
 
-            });
+            //});
 
 
 
@@ -121,6 +121,7 @@ namespace Contactos.ViewModel
 
                 if(indice >= 0)
                 {
+                    Favoritos.Remove(_Contacto);
                     Contactos.Remove(_Contacto);
                     OnPropertyChanged();
                 }
@@ -163,7 +164,19 @@ namespace Contactos.ViewModel
             async Task PCmdContactoAgregarFavorito(Models.Contacto _Contacto)
             {
                 
+                if(!_Contacto.Favorito)
+                {
+                    Favoritos.Add(_Contacto);
+
+                }
+                else
+                {
+                    Favoritos.Remove(_Contacto);
+                    
+                }
+
                 _Contacto.Favorito = _Contacto.Favorito ? false : true;
+                
                 OnPropertyChanged();
 
             }
@@ -173,7 +186,7 @@ namespace Contactos.ViewModel
             {
                 //await Application.Current.MainPage.Navigation.PushAsync(new View.ContactoFavoritos(this));
 
-                Favoritos = new ObservableCollection<Contacto>(Contactos.Where((Contacto) => Contacto.Favorito.Equals(true)));
+                //Favoritos = new ObservableCollection<Contacto>(Contactos.Where((Contacto) => Contacto.Favorito.Equals(true)));
                 OnPropertyChanged();
                 await Application.Current.MainPage.Navigation.PushAsync(new View.ContactoFavoritos(this));
 
